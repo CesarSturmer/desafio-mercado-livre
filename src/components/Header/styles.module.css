@@ -7,6 +7,10 @@
   grid-column: span 12;
   grid-template-columns: repeat(12, 1fr);
   grid-template-areas: ". search search search search search search search search search search .";
+
+  @media (max-width: 1024px) {
+    grid-template-areas: "search search search search search search search search search search search search";
+  }
 }
 
 .content_search {

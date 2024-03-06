@@ -5,6 +5,8 @@ import stylesShared from "../../styles/shared/items/styles.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Breadcrumb from "../Breadcrumb";
+import iconeShipping from "@/assets/ic_shipping.png";
+import iconeSearch from "@/assets/erro-pesquisa.webp";
 
 type ListProductsProps = {
   data: Omit<FormattedData, "author">;
@@ -12,18 +14,21 @@ type ListProductsProps = {
 
 const ListProducts = ({ data }: ListProductsProps) => {
   const { items, categories } = data;
-
   const router = useRouter();
 
   const handleDetails = (idProduct: string) => {
-    router.push(`/items/${idProduct}?categories=${categories}`);
+    const haveCategories = !!categories.length;
+
+    router.push(
+      `/items/${idProduct} ${haveCategories ? `?categories=${categories}` : ""}`
+    );
   };
 
   return (
     <div className={stylesShared["wrapper"]}>
       <Breadcrumb categories={categories} />
       <div className={stylesShared["wrapper-card"]}>
-        {items.length > 0 ? (
+        {items.length > 0 && items !== null ? (
           items.map((item) => (
             <div className={stylesShared["content-card"]} key={item.id}>
               <div
@@ -42,23 +47,50 @@ const ListProducts = ({ data }: ListProductsProps) => {
                 </div>
 
                 <div className={stylesShared["info-price"]}>
-                  <h1 className={stylesShared.price}>
-                    {item.price.amount.toLocaleString("es-AR", {
-                      style: "currency",
-                      currency: "ARS",
-                    })}
-                  </h1>
+                  <div className={stylesShared["info-content-price"]}>
+                    <h1 className={stylesShared.price}>
+                      {item.price.amount.toLocaleString("es-AR", {
+                        style: "currency",
+                        currency: "ARS",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
+                    </h1>
+
+                    {item.free_shipping && (
+                      <Image
+                        src={iconeShipping}
+                        alt="icone caminhao de entrega"
+                      />
+                    )}
+                  </div>
 
                   <span className={stylesShared.title}>{item.title}</span>
                 </div>
               </div>
+
               <hr className={stylesShared.hr} />
             </div>
           ))
         ) : (
           <div className={stylesShared["content-card"]}>
-            <div className={stylesShared["content-card-items"]}>
-              <h1>PRODUTO NAO ENCONTRADO, TENTE ALGO MELHOR</h1>
+            <div
+              className={stylesShared["content-card-error"]}
+              style={{ padding: "42px 40px 32px" }}
+            >
+              <div className={stylesShared["content-card-error-row"]}>
+                <Image
+                  width={80}
+                  height={80}
+                  src={iconeSearch}
+                  alt="lupa com de busca para resultado nao encontrado"
+                />
+                <div>
+                  <h1 className={stylesShared.title}>
+                    Não há anúncios que correspondam à sua busca
+                  </h1>
+                </div>
+              </div>
             </div>
           </div>
         )}

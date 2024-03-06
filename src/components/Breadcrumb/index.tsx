@@ -13,7 +13,7 @@ const Breadcrumb = ({ categories }: { categories: string[] | undefined }) => {
           </p>
         ))
       ) : (
-        <p className={styles["breadcrumb-description"]}>sem categoria</p>
+        <p className={styles["breadcrumb-description"]}></p>
       )}
     </div>
   );
