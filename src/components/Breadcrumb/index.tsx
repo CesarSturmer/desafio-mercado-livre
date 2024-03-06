@@ -4,8 +4,6 @@ import React from "react";
 import styles from "./styles.module.css";
 
 const Breadcrumb = ({ categories }: { categories: string[] | undefined }) => {
-  console.log("🚀 ~ Breadcrumb ~ categories:", categories);
-
   return (
     <div className={styles.breadcrumb}>
       {categories ? (
