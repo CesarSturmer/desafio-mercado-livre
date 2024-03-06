@@ -27,7 +27,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: var(--secondary-gray);
+  background: var(--primary-white);
 }
 
 a {
