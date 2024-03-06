@@ -1,9 +1,8 @@
 import React from "react";
-import Header from "@/components/Header";
 import styles from "./page.module.css";
 import { FormattedDataDetails } from "@/types/responseItems/index.type";
-import Breadcrumb from "@/components/Breadcrumb";
 import Image from "next/image";
+import ReturnBreadcrumb from "./breadcrumbclient";
 
 async function getDetailsProduct(idProduct: string) {
   const res = await fetch(
@@ -25,12 +24,10 @@ export default async function ProductDetails({
   params: { id: string };
 }) {
   const response: FormattedDataDetails = await getDetailsProduct(params.id);
-
   return (
     <>
-      {/* <Breadcrumb /> */}
-
       <div className={styles["wrapper"]}>
+        <ReturnBreadcrumb />
         <div className={styles["wrapper-card"]}>
           <div className={styles["content-img"]}>
             <Image
@@ -38,14 +35,15 @@ export default async function ProductDetails({
               style={{
                 borderRadius: "4px",
                 width: "100%",
-                // height: "100%",
+                height: "100%",
+                maxHeight: "550px",
                 objectFit: "contain",
               }}
               width={0}
               height={500}
               alt={response.item.title}
               loading="lazy"
-              //quality={100}
+              quality={100}
             />
           </div>
 

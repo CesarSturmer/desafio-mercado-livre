@@ -1,7 +1,6 @@
 "use client";
 import { FormattedData } from "@/types/responseItems/index.type";
 import React from "react";
-import styles from "./styles.module.css";
 import stylesShared from "../../styles/shared/items/styles.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -12,16 +11,17 @@ type ListProductsProps = {
 };
 
 const ListProducts = ({ data }: ListProductsProps) => {
-  const { items } = data;
+  const { items, categories } = data;
 
   const router = useRouter();
+
   const handleDetails = (idProduct: string) => {
-    router.push(`/items/${idProduct}`);
+    router.push(`/items/${idProduct}?categories=${categories}`);
   };
 
   return (
     <div className={stylesShared["wrapper"]}>
-      {/* <Breadcrumb /> */}
+      <Breadcrumb categories={categories} />
       <div className={stylesShared["wrapper-card"]}>
         {items.length > 0 ? (
           items.map((item) => (

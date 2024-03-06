@@ -1,11 +1,9 @@
 .wrapper {
   grid-template-areas: ". list list list list list list list list list list .";
   display: grid;
-
   height: -moz-fit-content;
   height: fit-content;
   width: 100%;
-
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 46px repeat(11, 1fr);
 }
@@ -18,7 +16,6 @@
   grid-row-end: 12;
   padding: 16px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-
   display: flex;
   gap: 16px;
   flex-direction: column;
@@ -28,6 +25,8 @@
   border-radius: 2px;
   background: #fff;
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .content-card-items {
@@ -35,6 +34,9 @@
   gap: 16px;
   padding-bottom: 16px;
   cursor: pointer;
+  grid-column-start: 1;
+  grid-column-end: 8;
+  grid-row-start: 1;
 }
 
 .img {
@@ -53,6 +55,7 @@
   font-size: 24px;
   color: var(--primary-black);
 }
+
 .title {
   font-size: 18px;
   color: var(--primary-black);
@@ -62,4 +65,8 @@
   margin: 0 16px;
   border: 1px solid var(--primary-white);
   border-radius: 5px;
+  grid-column-start: 1;
+  grid-column-end: 13;
+  grid-row-start: 2;
+  display: flex;
 }

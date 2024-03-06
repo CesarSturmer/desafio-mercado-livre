@@ -3,15 +3,11 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-const Breadcrumb = () => {
-  const categories = window?.localStorage.getItem("categories");
-
-  const listCategories = categories?.split(",");
-
+const Breadcrumb = ({ categories }: { categories: string[] | undefined }) => {
   return (
     <div className={styles.breadcrumb}>
-      {listCategories ? (
-        listCategories.map((item) => (
+      {categories ? (
+        categories.map((item) => (
           <p className={styles["breadcrumb-description"]} key={item}>
             {item}
           </p>

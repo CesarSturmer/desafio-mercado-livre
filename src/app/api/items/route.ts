@@ -2,6 +2,9 @@ import { FormattedData, ResponseItems } from "@/types/responseItems/index.type";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, response: NextResponse) {
+  const query = request.nextUrl.searchParams;
+  const queryValue = query.get("q");
+
   const options = {
     method: "GET",
     headers: {
@@ -11,7 +14,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
   };
 
   const returnCategories = (dataCategories: ResponseItems) => {
-    if (dataCategories.filters.length > 0) {
+    if (dataCategories.filters?.length > 0) {
       const filteredCategory = dataCategories.filters.filter(
         (filter) => filter.id === "category"
       );
@@ -33,12 +36,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
   };
 
   try {
-    const query = request.nextUrl.searchParams;
-
-    const queryValue = query.get("q");
-
     const size = 4;
-
     const resApiList = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL_MELI}/sites/MLA/search?q=${queryValue}&limit=${size}`,
       options

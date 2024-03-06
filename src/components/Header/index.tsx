@@ -14,7 +14,7 @@ const Header = () => {
     ev.preventDefault();
 
     if (search.length > 0) {
-      router.replace(`/items?search=${search}`);
+      router.replace(`/${search}`);
     }
   };
 
