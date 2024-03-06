@@ -4,6 +4,7 @@
   grid-row-end: 2;
   padding: 16px;
   display: flex;
+  gap: 3px;
 }
 
 .breadcrumb-description {
