@@ -42,19 +42,11 @@ export async function GET(request: NextRequest, response: NextResponse) {
       options
     );
 
-    if (!resApiList.ok) {
-      const errorMessage = `Failed to fetch data from the external API. Status: ${response.status}`;
-
-      return new Response(errorMessage, {
-        status: 400,
-      });
-    }
-
     const data: ResponseItems = await resApiList.json();
+
     const formattedData: FormattedData = {
       author: { name: "Cesar", lastname: "Sturmer" },
       categories: returnCategories(data),
-
       items: data.results.map((item) => ({
         id: item.id,
         title: item.title,

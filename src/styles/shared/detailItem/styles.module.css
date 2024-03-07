@@ -72,6 +72,10 @@
   padding: 32px 32px 0 0;
   gap: 32px;
 
+  @media (max-width: 1200px) {
+    grid-column-start: 9;
+  }
+
   @media (max-width: 1024px) {
     grid-column-start: 8;
   }
@@ -90,11 +94,19 @@
 .info-payment-title {
   font-size: 24px;
   color: var(--primary-black);
+
+  @media (max-width: 767px) {
+    font-size: 20px;
+  }
 }
 
 .content-info-price {
   font-size: 46px;
   color: var(--primary-black);
+
+  @media (max-width: 767px) {
+    font-size: 38px;
+  }
 }
 
 .button {

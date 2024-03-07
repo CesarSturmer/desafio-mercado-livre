@@ -17,38 +17,41 @@ export async function GET(
     const responseDetails = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL_MELI}/items/${params.id}`,
       options
-    );
+    ).then((res) => res.json());
+
     const responseDescription = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL_MELI}/items/${params.id}/description`,
       options
-    );
+    ).then((res) => res.json());
 
-    const dataDetails = await responseDetails.json();
-    const dataDescription = await responseDescription.json();
+    const [details, description] = await Promise.all([
+      responseDetails,
+      responseDescription,
+    ]);
 
     const formattedData: FormattedDataDetails = {
       author: { name: "Cesar", lastname: "Sturmer" },
       item: {
-        id: dataDetails.id,
-        title: dataDetails.title,
+        id: details.id,
+        title: details.title,
         price: {
-          currency: dataDetails.currency_id,
-          amount: Math.floor(dataDetails.price),
-          decimals: (dataDetails.price % 1).toFixed(2),
+          currency: details.currency_id,
+          amount: Math.floor(details.price),
+          decimals: (details.price % 1).toFixed(2),
         },
-        picture: dataDetails.pictures[0]?.url || "",
-        condition: dataDetails.condition,
-        free_shipping: dataDetails.shipping?.free_shipping || false,
-        sold_quantity: dataDetails.sold_quantity || 0, // not return api
-        description: dataDescription.plain_text || "",
+        picture: details.pictures[0]?.url || "",
+        condition: details.condition,
+        free_shipping: details.shipping?.free_shipping || false,
+        sold_quantity: details.sold_quantity || 0, // not return api
+        description: description.plain_text || "",
       },
     };
 
     return NextResponse.json(formattedData);
   } catch (error: any) {
     console.error(error);
-    return new Response(`Webhook error: ${error.message}`, {
-      status: 400,
+    return new Response(`${error.message}`, {
+      status: 500,
     });
   }
 }

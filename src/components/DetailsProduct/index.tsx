@@ -1,20 +1,10 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
 import ReturnBreadcrumb from "@/app/items/[id]/breadcrumbclient";
 import styles from "@/styles/shared/detailItem/styles.module.css";
 import Image from "next/image";
 import { FormattedDataDetails } from "@/types/responseItems/index.type";
-import { useRouter } from "next/navigation";
 
 const DetailsProduct = ({ data }: { data: FormattedDataDetails | null }) => {
-  const router = useRouter();
-
-  useEffect(() => {
-    if (data === null) {
-      router.back();
-    }
-  }, [data, router]);
-
   return (
     <>
       {data === null ? null : (
@@ -63,14 +53,15 @@ const DetailsProduct = ({ data }: { data: FormattedDataDetails | null }) => {
 
               <button className={styles.button}>Comprar</button>
             </div>
+            {!!data.item.description.length ? (
+              <div className={styles["content-info-description"]}>
+                <h1 className={styles["content-info-price"]}>
+                  Descripción del producto
+                </h1>
 
-            <div className={styles["content-info-description"]}>
-              <h1 className={styles["content-info-price"]}>
-                Descripción del producto
-              </h1>
-
-              <p>{data.item.description}</p>
-            </div>
+                <p>{data.item.description}</p>
+              </div>
+            ) : null}
           </div>
         </div>
       )}

@@ -10,19 +10,25 @@ import iconeSearch from "@/assets/erro-pesquisa.webp";
 
 type ListProductsProps = {
   data: Omit<FormattedData, "author">;
+  isIDsearch: boolean;
+  search: string;
 };
 
-const ListProducts = ({ data }: ListProductsProps) => {
+const ListProducts = ({ data, isIDsearch, search }: ListProductsProps) => {
   const { items, categories } = data;
   const router = useRouter();
 
   const handleDetails = (idProduct: string) => {
     const haveCategories = !!categories.length;
-
     router.push(
       `/items/${idProduct} ${haveCategories ? `?categories=${categories}` : ""}`
     );
   };
+
+  if (isIDsearch) {
+    router.push(`items/${search}`);
+    return null;
+  }
 
   return (
     <div className={stylesShared["wrapper"]}>
