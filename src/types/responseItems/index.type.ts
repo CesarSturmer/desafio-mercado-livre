@@ -27,6 +27,7 @@ export interface FormattedData {
   author: Author;
   categories: string[];
   items: ItemProduct[];
+  status?: number;
 }
 
 export interface FormattedDataDetails {

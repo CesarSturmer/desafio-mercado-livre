@@ -1,5 +1,6 @@
 import React from "react";
 import DetailsProduct from "@/components/DetailsProduct";
+import ErrorComponent from "@/components/Error";
 
 async function getDetailsProduct(idProduct: string) {
   try {
@@ -8,13 +9,16 @@ async function getDetailsProduct(idProduct: string) {
     );
 
     if (!res.ok) {
-      throw new Error("Failed to fetch data details");
+      throw new Error(`Failed to fetch data details, status: ${res.status} `);
     }
 
     return res.json();
   } catch (error) {
     console.error("There was an error fetching the product details", error);
-    return null;
+    return {
+      message: error,
+      status: 500,
+    };
   }
 }
 
@@ -27,7 +31,11 @@ export default async function ProductDetails({
 
   return (
     <>
-      <DetailsProduct data={response} />
+      {response.status === 500 ? (
+        <ErrorComponent />
+      ) : (
+        <DetailsProduct data={response} />
+      )}
     </>
   );
 }

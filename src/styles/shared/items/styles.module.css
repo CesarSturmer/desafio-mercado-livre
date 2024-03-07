@@ -45,6 +45,14 @@
   @media (max-width: 1024px) {
     grid-column-end: 12;
   }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 }
 
 .content-card-error {
