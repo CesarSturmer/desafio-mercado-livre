@@ -28,18 +28,15 @@ export default async function ProductItems({
 }: {
   params: { search: string };
 }) {
-  // se começar COM MLA DEVE IR PARA DETALHES
   const response: FormattedData = await getProduct(params.search);
 
   function validateMLAID() {
     // A expressão regular começa com 'MLA', seguida por exatamente 10 caracteres alfanuméricos.
-    // Você pode ajustar o número de caracteres alfanuméricos (\d{10}) conforme necessário.
     const regex = /^MLA\d{10}$/;
     return regex.test(params.search);
   }
 
   const isID = validateMLAID();
-  console.log("🚀 ~ isID:", isID);
 
   return (
     <>
