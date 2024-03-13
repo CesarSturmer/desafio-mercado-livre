@@ -12,8 +12,7 @@
   width: 100%;
 
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 32px;
+  grid-template-rows: 46px repeat(11, 1fr);
 }
 
 .breadcrumb {
@@ -40,7 +39,9 @@
 
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(9, 1fr);
+  grid-template-rows: repeat(2 1fr);
+
+  gap: 32px;
 
   @media (max-width: 767px) {
     display: flex;
